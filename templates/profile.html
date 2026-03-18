@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>User Profile</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/diagnosis">Symptom Checker</a>
+        <a href="/profile">User Profile</a>
+        <a href="/insights">Health Insights</a>
+        <a href="/about">About</a>
+    </nav>
+    <main class="container">
+        <div class="card">
+            <div id="user-profile"></div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Health Dashboard</p>
+    </footer>
+    <script src="/static/js/main.js"></script>
+    <script>
+        async function fetchUserProfile() {
+            const response = await fetch('/api/user/1');
+            const user = await response.json();
+            const profileDiv = document.getElementById('user-profile');
+            profileDiv.innerHTML = `<p>Name: ${user.name}</p><p>Age: ${user.age}</p><p>Gender: ${user.gender}</p><p>Medical History: ${user.medical_history.join(', ')}</p>`;
+        }
+        fetchUserProfile();
+    </script>
+</body>
+</html>

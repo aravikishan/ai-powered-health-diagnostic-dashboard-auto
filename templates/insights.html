@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insights</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Health Insights</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/diagnosis">Symptom Checker</a>
+        <a href="/profile">User Profile</a>
+        <a href="/insights">Health Insights</a>
+        <a href="/about">About</a>
+    </nav>
+    <main class="container">
+        <div class="card">
+            <div id="insights-data"></div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Health Dashboard</p>
+    </footer>
+    <script src="/static/js/main.js"></script>
+    <script>
+        async function fetchInsights() {
+            const response = await fetch('/api/insights');
+            const insights = await response.json();
+            const insightsDiv = document.getElementById('insights-data');
+            insightsDiv.innerHTML = `<p>Data: ${insights.data}</p><p>Recommendations: ${insights.recommendations}</p>`;
+        }
+        fetchInsights();
+    </script>
+</body>
+</html>
